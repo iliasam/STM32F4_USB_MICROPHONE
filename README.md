@@ -1,4 +1,5 @@
-This is project of USB microphone for STM32F4-DISCOVERY.
+This is USB microphone realization for STM32F4-DISCOVERY. 
+MEMS microphone installed at the board is used in this project.
 
 Проект USB микрофона для STM32F4-DISCOVERY.
 
