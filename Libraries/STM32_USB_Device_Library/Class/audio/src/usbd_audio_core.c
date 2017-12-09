@@ -1,5 +1,5 @@
 #include "usbd_audio_core.h"
-#include "usbd_audio_out_if.h"
+//#include "usbd_audio_out_if.h"
 #include "waverecorder.h"
 
 
@@ -14,8 +14,9 @@ static uint8_t  usbd_audio_EP0_RxReady(void *pdev);
 static uint8_t  usbd_audio_DataIn     (void *pdev, uint8_t epnum);
 static uint8_t  usbd_audio_DataOut    (void *pdev, uint8_t epnum);
 static uint8_t  usbd_audio_SOF        (void *pdev);
-//static uint8_t  usbd_audio_OUT_Incplt (void  *pdev);
-//static uint8_t  usbd_audio_IN_Incplt (void  *pdev);
+static uint8_t  usbd_audio_OUT_Incplt (void  *pdev);
+static uint8_t  usbd_audio_IN_Incplt (void  *pdev);
+
 
 /*********************************************
    AUDIO Requests management functions
@@ -59,8 +60,8 @@ USBD_Class_cb_TypeDef  AUDIO_cb =
   usbd_audio_DataIn,
   usbd_audio_DataOut,
   usbd_audio_SOF,
-  NULL,
-  NULL ,
+  usbd_audio_IN_Incplt,
+  usbd_audio_OUT_Incplt,
   USBD_audio_GetCfgDesc,
 #ifdef USB_OTG_HS_CORE  
   USBD_audio_GetCfgDesc, /* use same config as per FS */
@@ -432,6 +433,16 @@ static uint8_t  *USBD_audio_GetCfgDesc (uint8_t speed, uint16_t *length)
 /**
   * @}
   */ 
+
+static uint8_t  usbd_audio_OUT_Incplt (void  *pdev)
+{
+  return USBD_OK;
+}
+
+static uint8_t  usbd_audio_IN_Incplt (void  *pdev)
+{
+  return USBD_OK;
+}
 
 /**
   * @}

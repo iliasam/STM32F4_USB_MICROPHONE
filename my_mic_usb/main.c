@@ -1,4 +1,4 @@
-//STM32F4 USB MICROPHONE
+//STM32F4-Discovery USB MICROPHONE
 //by ILIASAM
 
 /* Includes ------------------------------------------------------------------*/
